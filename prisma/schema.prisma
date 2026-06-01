@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model cars {
+  id               Int     @id @default(autoincrement())
+  category         String  @db.VarChar(50)
+  model            String  @db.VarChar(100)
+  engine_power     Int
+  fuel             String  @db.VarChar(30)
+  price            Decimal @db.Decimal(10, 2)
+  color            String? @db.VarChar(30)
+  manufacture_year Int
+  history          String? @db.Text
+  rating           Int?
+}
+
+model users {
+  id       Int    @id @default(autoincrement())
+  username String @unique(map: "username") @db.VarChar(100)
+  password String @db.VarChar(255)
+}
